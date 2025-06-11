@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Вітальна листівка</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #fcefe3;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+    .card {
+      background: #fff;
+      border: 5px solid #f7c59f;
+      border-radius: 20px;
+      padding: 40px 60px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+      text-align: center;
+      max-width: 90vw;
+      width: 100%;
+      animation: fadeIn 1.5s ease-in-out forwards;
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    h1 {
+      font-size: 2em;
+      color: #ff6f61;
+      margin-bottom: 20px;
+    }
+    .emoji {
+      font-size: 3em;
+      margin-bottom: 20px;
+      animation: bounce 1s infinite;
+    }
+    @keyframes bounce {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+    p {
+      font-size: 1.2em;
+      color: #444;
+    }
+    button {
+      background: #ff6f61;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      padding: 12px 25px;
+      font-size: 1.1em;
+      margin-top: 30px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      box-shadow: 0 4px 10px rgba(255,111,97,0.5);
+    }
+    button:hover {
+      background-color: #e65a4f;
+    }
+    .extra-image {
+      margin-top: 25px;
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transition: opacity 0.6s ease, max-height 0.6s ease;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+    .extra-image.show {
+      opacity: 1;
+      max-height: 400px;
+    }
+    .extra-image img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 15px;
+      display: block;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="emoji">👶💖</div>
+    <h1>Ти скоро станеш дідусем!</h1>
+    <p>Приготуйся до найприємнішої події у твоєму житті 😊</p>
+    <button id="btnMore">Дізнатись більше</button>
+    <div class="extra-image" id="extraImg">
+      <img src="C:\Users\Nazar\Downloads\photo_2025-06-11_09-51-37.jpg" />
+    </div>
+  </div>
+
+  <script>
+    const btn = document.getElementById('btnMore');
+    const extraImg = document.getElementById('extraImg');
+
+    btn.addEventListener('click', () => {
+      extraImg.classList.toggle('show');
+      btn.textContent = extraImg.classList.contains('show') ? 'Приховати' : 'Дізнатись більше';
+    });
+  </script>
+</body>
+</html>
