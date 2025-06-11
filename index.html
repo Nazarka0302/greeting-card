@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>Веб-листівка</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #f0f0f0;
+      font-family: Arial, sans-serif;
+    }
+    #card {
+      position: relative;
+      width: 400px;
+      height: 200px;
+      background-color: #fff;
+      border: 2px solid #ccc;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      line-height: 200px;
+      font-size: 24px;
+      font-weight: bold;
+      color: #333;
+    }
+    canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 10;
+    }
+  </style>
+</head>
+<body>
+  <div id="card">
+    Вітаю ти станеш дідусем! 🎉
+    <canvas></canvas>
+  </div>
+
+  <script>
+    const card = document.getElementById('card');
+    const canvas = card.querySelector('canvas');
+    const ctx = canvas.getContext('2d');
+
+    canvas.width = card.offsetWidth;
+    canvas.height = card.offsetHeight;
+
+    ctx.fillStyle = '#c0c0c0'; // Сірий "шар"
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.globalCompositeOperation = 'destination-out';
+
+    function scratch(e) {
+      const rect = canvas.getBoundingClientRect();
+      const x = (e.touches ? e.touches[0].clientX : e.clientX) - rect.left;
+      const y = (e.touches ? e.touches[0].clientY : e.clientY) - rect.top;
+      ctx.beginPath();
+      ctx.arc(x, y, 20, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    canvas.addEventListener('mousedown', () => {
+      canvas.addEventListener('mousemove', scratch);
+    });
+
+    canvas.addEventListener('mouseup', () => {
+      canvas.removeEventListener('mousemove', scratch);
+    });
+
+    canvas.addEventListener('touchstart', scratch);
+    canvas.addEventListener('touchmove', scratch);
+  </script>
+</body>
+</html>
